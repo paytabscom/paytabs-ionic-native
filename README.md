@@ -422,7 +422,7 @@ startAlternativePaymentMethod(options: PaymentSDKConfiguration) => any
 
 ## Demo application
 
-Check our complete [https://github.com/paytabscom/react-native-paytabs-library/tree/main/example][example].
+Check our complete [example][example].
 
 <img src="https://user-images.githubusercontent.com/13621658/109432386-905e5280-7a13-11eb-847c-63f2c554e2d1.png" width="370">
 
