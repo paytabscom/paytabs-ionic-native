@@ -38,9 +38,9 @@ export class HomePage {
 
     // eslint-disable-next-line prefer-const
     let configuration: PaymentSDKConfiguration = {
-          profileID: '47554',
-          serverKey: 'SRJNLLK22J-JB6KG2G6K9-DWLH2WNLGT',
-          clientKey: 'CBKMDM-RDM962-GKTMTG-Q27HV9',
+          profileID: '*profile ID*',
+          serverKey: '*server key*',
+          clientKey: '*client key*',
           cartID: '12345',
           currency: 'USD',
           cartDescription: 'Flowers',
