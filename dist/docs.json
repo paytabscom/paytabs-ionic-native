@@ -6,24 +6,546 @@
     "tags": [],
     "methods": [
       {
-        "name": "echo",
-        "signature": "(options: { value: string; }) => any",
+        "name": "startCardPayment",
+        "signature": "(options: PaymentSDKConfiguration) => any",
         "parameters": [
           {
             "name": "options",
             "docs": "",
-            "type": "{ value: string; }"
+            "type": "PaymentSDKConfiguration"
           }
         ],
         "returns": "any",
         "tags": [],
         "docs": "",
-        "complexTypes": [],
-        "slug": "echo"
+        "complexTypes": [
+          "PaymentSDKConfiguration"
+        ],
+        "slug": "startcardpayment"
+      },
+      {
+        "name": "startApplePayPayment",
+        "signature": "(options: PaymentSDKConfiguration) => any",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "PaymentSDKConfiguration"
+          }
+        ],
+        "returns": "any",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PaymentSDKConfiguration"
+        ],
+        "slug": "startapplepaypayment"
+      },
+      {
+        "name": "startAlternativePaymentMethod",
+        "signature": "(options: PaymentSDKConfiguration) => any",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "PaymentSDKConfiguration"
+          }
+        ],
+        "returns": "any",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PaymentSDKConfiguration"
+        ],
+        "slug": "startalternativepaymentmethod"
       }
     ],
     "properties": []
   },
-  "interfaces": [],
+  "interfaces": [
+    {
+      "name": "PaymentSDKConfiguration",
+      "slug": "paymentsdkconfiguration",
+      "docs": "PaymentSDKConfiguration: payment request configuration",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "profileID",
+          "tags": [],
+          "docs": "merchant profile id",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "serverKey",
+          "tags": [],
+          "docs": "merchant server key",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "clientKey",
+          "tags": [],
+          "docs": "merchant client key",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "transactionType",
+          "tags": [],
+          "docs": "transaction type: refer to TransactionType enum",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "transactionClass",
+          "tags": [],
+          "docs": "transaction class: refer to TransactionClass enum",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "cartID",
+          "tags": [],
+          "docs": "order or cart id",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "tags": [],
+          "docs": "payment currency",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "tags": [],
+          "docs": "amount",
+          "complexTypes": [],
+          "type": "number"
+        },
+        {
+          "name": "cartDescription",
+          "tags": [],
+          "docs": "order or cart description",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "languageCode",
+          "tags": [],
+          "docs": "user interface language code(en, ar, ..)",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "forceShippingInfo",
+          "tags": [],
+          "docs": "validate shipping info",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "showBillingInfo",
+          "tags": [],
+          "docs": "validate billing info",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "showShippingInfo",
+          "tags": [],
+          "docs": "handle missing shipping info by showing shipping info section",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "billingDetails",
+          "tags": [],
+          "docs": "configured billing details",
+          "complexTypes": [
+            "PaymentSDKBillingDetails"
+          ],
+          "type": "PaymentSDKBillingDetails | undefined"
+        },
+        {
+          "name": "shippingDetails",
+          "tags": [],
+          "docs": "configured shipping details",
+          "complexTypes": [
+            "PaymentSDKShippingDetails"
+          ],
+          "type": "PaymentSDKShippingDetails | undefined"
+        },
+        {
+          "name": "merchantCountryCode",
+          "tags": [],
+          "docs": "merchant country code",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "screenTitle",
+          "tags": [],
+          "docs": "title of the screen",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "merchantName",
+          "tags": [],
+          "docs": "merchant name",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "serverIP",
+          "tags": [],
+          "docs": "server ip",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "tokeniseType",
+          "tags": [],
+          "docs": "tokenise type: refer to TokeiseType enum",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "tokenFormat",
+          "tags": [],
+          "docs": "token format: refer to TokeiseFormat enum",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "hideCardScanner",
+          "tags": [],
+          "docs": "option to hide or show card scanner button",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "merchantApplePayIdentifier",
+          "tags": [],
+          "docs": "merchant apple pay bundle id",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "simplifyApplePayValidation",
+          "tags": [],
+          "docs": "minize the vlaidation on apple pay billing and shipping info",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "supportedApplePayNetworks",
+          "tags": [],
+          "docs": "supported apple pay networks",
+          "complexTypes": [],
+          "type": "[string] | undefined"
+        },
+        {
+          "name": "token",
+          "tags": [],
+          "docs": "returned token",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "transactionReference",
+          "tags": [],
+          "docs": "returned transaction reference",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "samsungToken",
+          "tags": [],
+          "docs": "samsung Token",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "theme",
+          "tags": [],
+          "docs": "customized theme",
+          "complexTypes": [
+            "PaymentSDKTheme"
+          ],
+          "type": "PaymentSDKTheme | undefined"
+        },
+        {
+          "name": "alternativePaymentMethods",
+          "tags": [],
+          "docs": "list of alternative payment methods",
+          "complexTypes": [],
+          "type": "[string] | undefined"
+        }
+      ]
+    },
+    {
+      "name": "PaymentSDKBillingDetails",
+      "slug": "paymentsdkbillingdetails",
+      "docs": "PaymentSDKBillingDetails",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "name",
+          "tags": [],
+          "docs": "billing: customer name",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "email",
+          "tags": [],
+          "docs": "billing: customer email",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "phone",
+          "tags": [],
+          "docs": "billing: customer phone",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "addressLine",
+          "tags": [],
+          "docs": "billing: customer address line",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "city",
+          "tags": [],
+          "docs": "billing: customer city",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "state",
+          "tags": [],
+          "docs": "billing: customer state",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "countryCode",
+          "tags": [],
+          "docs": "billing: customer country code",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "zip",
+          "tags": [],
+          "docs": "billing: customer zip code",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "PaymentSDKShippingDetails",
+      "slug": "paymentsdkshippingdetails",
+      "docs": "PaymentSDKShippingDetails",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "name",
+          "tags": [],
+          "docs": "shipping: customer name",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "email",
+          "tags": [],
+          "docs": "shipping: customer email",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "phone",
+          "tags": [],
+          "docs": "shipping: customer phone",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "addressLine",
+          "tags": [],
+          "docs": "shipping: customer address line",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "city",
+          "tags": [],
+          "docs": "shipping: customer city",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "state",
+          "tags": [],
+          "docs": "shipping: customer state",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "countryCode",
+          "tags": [],
+          "docs": "shipping: customer country code",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "zip",
+          "tags": [],
+          "docs": "shipping: customer zip code",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "PaymentSDKTheme",
+      "slug": "paymentsdktheme",
+      "docs": "PaymentSDKTheme",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "primaryColor",
+          "tags": [],
+          "docs": "theme: primary color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "primaryFontColor",
+          "tags": [],
+          "docs": "theme: primary font color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "primaryFont",
+          "tags": [],
+          "docs": "theme: primary font",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "secondaryColor",
+          "tags": [],
+          "docs": "theme: secondary color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "secondaryFontColor",
+          "tags": [],
+          "docs": "theme: secondary font color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "secondaryFont",
+          "tags": [],
+          "docs": "theme: secondary font",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "strokeColor",
+          "tags": [],
+          "docs": "theme: stroke color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "strokeThinckness",
+          "tags": [],
+          "docs": "theme: primary color",
+          "complexTypes": [],
+          "type": "number | undefined"
+        },
+        {
+          "name": "inputsCornerRadius",
+          "tags": [],
+          "docs": "theme: input corner radius",
+          "complexTypes": [],
+          "type": "number | undefined"
+        },
+        {
+          "name": "buttonColor",
+          "tags": [],
+          "docs": "theme: button color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "buttonFontColor",
+          "tags": [],
+          "docs": "theme: button font color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "buttonFont",
+          "tags": [],
+          "docs": "theme: button font",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "titleFontColor",
+          "tags": [],
+          "docs": "theme: title font color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "titleFont",
+          "tags": [],
+          "docs": "theme: title font",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "backgroundColor",
+          "tags": [],
+          "docs": "theme: background color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "placeholderColor",
+          "tags": [],
+          "docs": "theme: placeholder color",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "logoImage",
+          "tags": [],
+          "docs": "theme: logo",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    }
+  ],
   "enums": []
 }

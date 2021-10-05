@@ -65,7 +65,7 @@ public class PayTabsIonicPlugin: CAPPlugin {
     }
 }
 
-extension PayTabsPlugin: PaymentManagerDelegate {
+extension PayTabsIonicPlugin: PaymentManagerDelegate {
     public func paymentManager(didCancelPayment error: Error?) {
         let result = sendPluginResult(code: 0, message: "Cancelled", status: "event")
         call.resolve(result)
@@ -92,3 +92,4 @@ extension PayTabsPlugin: PaymentManagerDelegate {
         }
     }
 }
+

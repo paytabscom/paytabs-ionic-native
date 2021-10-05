@@ -1,4 +1,4 @@
-import type { PayTabsIonicPlugin } from './definitions';
+import type { AlternativePaymentMethod, PaymentSDKBillingDetails, PaymentSDKConfiguration, PaymentSDKShippingDetails, PaymentSDKTheme, PayTabsIonicPlugin, TokeniseFromat, TokeniseType, TransactionClass, TransactionType } from './definitions';
 declare const PayTabsIonic: PayTabsIonicPlugin;
 export * from './definitions';
-export { PayTabsIonic };
+export { PayTabsIonic, PaymentSDKConfiguration, PaymentSDKBillingDetails, PaymentSDKShippingDetails, PaymentSDKTheme, TokeniseType, TokeniseFromat, TransactionType, TransactionClass, AlternativePaymentMethod };

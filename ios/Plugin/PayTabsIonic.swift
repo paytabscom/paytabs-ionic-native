@@ -1,9 +1,9 @@
-import Foundation
+import UIKit
 import PaymentSDK
 
 @objc public class PayTabsIonic: NSObject {
     
-     func generateConfiguration(dictionary: [String: Any]) -> PaymentSDKConfiguration {
+    func generateConfiguration(dictionary: [String: Any]) -> PaymentSDKConfiguration {
         let configuration = PaymentSDKConfiguration()
         configuration.profileID = dictionary["profileID"] as? String ?? ""
         configuration.serverKey = dictionary["serverKey"] as? String ?? ""

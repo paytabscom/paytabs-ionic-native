@@ -1,8 +1,13 @@
 import { WebPlugin } from '@capacitor/core';
 export class PayTabsIonicWeb extends WebPlugin {
-    async echo(options) {
-        console.log('ECHO', options);
-        return options;
+    startCardPayment(_options) {
+        throw new Error('Method not implemented.');
+    }
+    startApplePayPayment(_options) {
+        throw new Error('Method not implemented.');
+    }
+    startAlternativePaymentMethod(_options) {
+        throw new Error('Method not implemented.');
     }
 }
 //# sourceMappingURL=web.js.map

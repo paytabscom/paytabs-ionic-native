@@ -2,10 +2,16 @@ PODS:
   - Capacitor (3.2.4):
     - CapacitorCordova
   - CapacitorCordova (3.2.4)
+  - PayTabsSDK (6.1.6)
 
 DEPENDENCIES:
   - "Capacitor (from `../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../node_modules/@capacitor/ios`)"
+  - PayTabsSDK (~> 6.1.6)
+
+SPEC REPOS:
+  trunk:
+    - PayTabsSDK
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -16,7 +22,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 07f746722420584674243fe6bb2e02d243a02a08
   CapacitorCordova: 16f118e79d7c20eb659565b1ed9133e2b730f747
+  PayTabsSDK: 4aeac175d16c2666ff44b1f8256675a211144e3b
 
-PODFILE CHECKSUM: d908dea01cb4b1885654341d3f4274148fb6d382
+PODFILE CHECKSUM: 03bed8a7ee2b84abb6e48a70c933c8f02e3befd4
 
 COCOAPODS: 1.11.0

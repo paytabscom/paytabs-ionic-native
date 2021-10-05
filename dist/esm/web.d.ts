@@ -1,9 +1,7 @@
 import { WebPlugin } from '@capacitor/core';
-import type { PayTabsIonicPlugin } from './definitions';
+import type { PayTabsIonicPlugin, PaymentSDKConfiguration } from './definitions';
 export declare class PayTabsIonicWeb extends WebPlugin implements PayTabsIonicPlugin {
-    echo(options: {
-        value: string;
-    }): Promise<{
-        value: string;
-    }>;
+    startCardPayment(_options: PaymentSDKConfiguration): Promise<any>;
+    startApplePayPayment(_options: PaymentSDKConfiguration): Promise<any>;
+    startAlternativePaymentMethod(_options: PaymentSDKConfiguration): Promise<any>;
 }
