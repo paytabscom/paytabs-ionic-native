@@ -1,8 +1,8 @@
 # node files
 dist
-node_modules
+node_modules/
 
-example/node_modules
+example/node_modules/
 
 # iOS files
 Pods
@@ -267,13 +267,13 @@ playground.xcworkspace
 # hence it is not needed unless you have added a package configuration file to your project
 # .swiftpm
 
-.build/
+example/.build/
 
 # CocoaPods
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-# Pods/
+example/Pods/
 # Add this line if you want to avoid checking in source code from the Xcode workspace
 # *.xcworkspace
 
@@ -462,4 +462,4 @@ example/ios/DerivedData
 example/ios/xcuserdata
 
 # Cordova plugins for Capacitor
-capacitor-cordova-ios-plugins
+example/ios/capacitor-cordova-ios-plugins
