@@ -1,5 +1,5 @@
 # paytabs-ionic-native
-![Version](https://img.shields.io/badge/PayTabs%20Ionic%20Native-v0.0.1-green)
+![Version](https://img.shields.io/badge/PayTabs%20Ionic%20Native-v1.0.0-green)
 
 PayTabs Ionic Native library is a wrapper for the native PayTabs Android and iOS SDKs, It helps you integrate with PayTabs seamlessly.
 
@@ -16,29 +16,6 @@ npx cap sync
 ```
 
 ### Follow the below steps to complete the installation
-* Android
-	* Register plugin in the project `MainActivity.java` file
-  ```
-  import com.getcapacitor.BridgeActivity;
-  import com.getcapacitor.Plugin;
-  import com.paytabs.ionic.plugin.PayTabs;
-  import com.paytabs.ionic.plugin.PayTabsIonicPlugin;
-  import java.util.ArrayList;
-
-  public class MainActivity extends BridgeActivity {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-
-      // Initializes the Bridge
-      this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
-        // Additional plugins you've installed go here
-        // Ex: add(TotallyAwesomePlugin.class);
-        add(PayTabsIonicPlugin.class);
-      }});
-    }
-  }
-  ```
 * iOS
 	* Navigate to the iOS folder and run the following command: 
 	```
