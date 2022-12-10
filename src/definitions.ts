@@ -1,5 +1,8 @@
 export interface PayTabsIonicPlugin {
   startCardPayment(options: PaymentSDKConfiguration): Promise<any>;
+  startTokenizedCardPayment(options: PaymentSDKConfiguration, token: string, transactionRef:string): Promise<any>;
+  start3DSecureTokenizedCardPayment(options: PaymentSDKConfiguration, savedCardInfo: PaymentSDKSavedCardInfo, token: string): Promise<any>;
+  startPaymentWithSavedCards(options: PaymentSDKConfiguration, support3ds: boolean): Promise<any>;
   startApplePayPayment(options: PaymentSDKConfiguration): Promise<any>;
   startAlternativePaymentMethod(options: PaymentSDKConfiguration): Promise<any>;
 }
@@ -282,6 +285,20 @@ export interface PaymentSDKTheme {
   logoImage?: string;
 } 
 
+
+/**
+* PaymentSDKSavedCardInfo
+*/
+export interface PaymentSDKSavedCardInfo {
+  /**
+  * maskedCard: Card mask
+  */
+   maskedCard?: string;
+  /**
+  * cardType: card type (visa, mc...)
+  */
+   cardType?: string;
+} 
 /**
 * TokeniseType: define the behaviour of of saving card option inside the SDKs.
 */

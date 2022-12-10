@@ -37,6 +37,52 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
     }
 
     @PluginMethod
+    public void startTokenizedCardPayment(PluginCall call) {
+        this.call = call;
+        try {
+            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
+            PaymentSdkActivity.startTokenizedCardPayment(this.getActivity(), configData, token, transactionRef, this);
+        } catch (JSONException e) {
+            payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
+        }
+
+    }
+
+    @PluginMethod
+    public void start3DSecureTokenizedCardPayment(PluginCall call) {
+        this.call = call;
+        try {
+            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
+            String samsungToken = call.getString("samsungToken");
+
+            if (samsungToken != null && samsungToken.length() > 0)
+                PaymentSdkActivity.startSamsungPayment(this.getActivity(), configData, samsungToken, this);
+            else
+                PaymentSdkActivity.startCardPayment(this.getActivity(), configData, this);
+        } catch (JSONException e) {
+            payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
+        }
+
+    }
+
+    @PluginMethod
+    public void startPaymentWithSavedCards(PluginCall call) {
+        this.call = call;
+        try {
+            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
+            String samsungToken = call.getString("samsungToken");
+
+            if (samsungToken != null && samsungToken.length() > 0)
+                PaymentSdkActivity.startSamsungPayment(this.getActivity(), configData, samsungToken, this);
+            else
+                PaymentSdkActivity.startCardPayment(this.getActivity(), configData, this);
+        } catch (JSONException e) {
+            payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
+        }
+
+    }
+
+    @PluginMethod
     public void startAlternativePaymentMethod(PluginCall call) {
         this.call = call;
 
