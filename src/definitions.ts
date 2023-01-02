@@ -5,8 +5,17 @@ export interface PayTabsIonicPlugin {
   startPaymentWithSavedCards(options: PaymentSDKConfiguration, support3ds: boolean): Promise<any>;
   startApplePayPayment(options: PaymentSDKConfiguration): Promise<any>;
   startAlternativePaymentMethod(options: PaymentSDKConfiguration): Promise<any>;
+  queryTransaction(options: PaymentSDKQueryConfiguration): Promise<any>
 }
 
+
+export interface PaymentSDKQueryConfiguration{
+   serverKey: string,
+  clientKey: string,
+  merchantCountryCode: string,
+  profileID: string,
+  transactionReference: string
+}
 
 /**
 * PaymentSDKConfiguration: payment request configuration
