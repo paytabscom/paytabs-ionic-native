@@ -4,17 +4,35 @@ export interface PayTabsIonicPlugin {
   start3DSecureTokenizedCardPayment(options: PaymentSDKConfiguration, savedCardInfo: PaymentSDKSavedCardInfo, token: string): Promise<any>;
   startPaymentWithSavedCards(options: PaymentSDKConfiguration, support3ds: boolean): Promise<any>;
   startApplePayPayment(options: PaymentSDKConfiguration): Promise<any>;
+  queryTransaction(options: PaymentSDKQueryConfiguration): Promise<any>;
   startAlternativePaymentMethod(options: PaymentSDKConfiguration): Promise<any>;
-  queryTransaction(options: PaymentSDKQueryConfiguration): Promise<any>
 }
 
 
+/**
+* PaymentSDKQueryConfiguration: query request configuration
+*/
 export interface PaymentSDKQueryConfiguration{
-   serverKey: string,
-  clientKey: string,
-  merchantCountryCode: string,
-  profileID: string,
-  transactionReference: string
+  /**
+  * merchant server key
+  */
+  serverKey: string;
+  /**
+  * merchant client key
+  */
+  clientKey: string;
+  /**
+  * merchant country code
+  */
+  merchantCountryCode: string;
+  /**
+  * merchant profile id
+  */
+  profileID: string;
+  /**
+  * returned transaction reference
+  */
+  transactionReference: string;
 }
 
 /**

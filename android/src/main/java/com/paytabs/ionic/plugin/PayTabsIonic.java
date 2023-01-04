@@ -21,6 +21,7 @@ import com.payment.paymentsdk.integrationmodels.PaymentSdkTokenFormat;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTokenise;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionDetails;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionType;
+import com.payment.paymentsdk.integrationmodels.PaymentSDKQueryConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -159,4 +160,41 @@ public class PayTabsIonic {
         }
         pluginCall.reject(msg);
     }
+
+        public PaymentSDKQueryConfiguration createQueryConfiguration(PluginCall paymentDetails) throws JSONException {
+        Log.d("Plugin Call", paymentDetails.getString("profileID"));
+        String profileId = paymentDetails.getString("profileID");
+        String serverKey = paymentDetails.getString("serverKey");
+        String clientKey = paymentDetails.getString("clientKey");
+        String transRef = paymentDetails.getString("transactionReference");
+        String merchantCountryCode = paymentDetails.getString("merchantCountryCode");
+        PaymentSDKQueryConfiguration configData = new PaymentSDKQueryConfiguration(
+                serverKey, clientKey, merchantCountryCode, profileId, transRef);
+
+        return configData;
+    }
+
+    
+    void returnQueryResponse(int code, String msg, String status, TransactionResponseBody data, PluginCall pluginCall) {
+        JSObject json = new JSObject();
+        if (data != null) {
+            String detailsString = new Gson().toJson(data);
+            try {
+                JSONObject transactionDetails = new JSONObject(detailsString);
+                json.put("data", transactionDetails);
+                json.put("code", code);
+                json.put("message", msg);
+                json.put("status", status);
+                pluginCall.resolve(json);
+                return;
+            } catch (JSONException e) {
+                json.put("data", null);
+                pluginCall.reject(e.getLocalizedMessage());
+                return;
+            }
+        }
+        pluginCall.reject(msg);
+    }
+
+
 }

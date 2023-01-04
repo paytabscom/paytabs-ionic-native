@@ -9,12 +9,14 @@ import com.payment.paymentsdk.integrationmodels.PaymentSdkConfigurationDetails;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkError;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionDetails;
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface;
+import com.payment.paymentsdk.sharedclasses.interfaces.CallbackQueryInterface;
+import com.payment.paymentsdk.QuerySdkActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 
 @CapacitorPlugin(name = "PayTabsIonic")
-public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterface {
+public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterface, CallbackQueryInterface {
 
     private PayTabsIonic payTabsHelper = new PayTabsIonic();
 
@@ -94,12 +96,37 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
         }
     }
 
+
+    
+    @PluginMethod
+    public void queryTransaction(PluginCall call) {
+        this.call = call;
+        try {
+            PaymentSDKQueryConfiguration configData = payTabsHelper.createQueryConfiguration(call);
+            QuerySdkActivity.queryTransaction(this.getActivity(), configData, this);
+        } catch (JSONException e) {
+            payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
+        }
+
+    }
+
     @Override
     public void onError(@NotNull PaymentSdkError err) {
         if (err.getCode() != null)
             payTabsHelper.returnResponse(err.getCode(), err.getMsg(), "error",null, call);
         else
             payTabsHelper.returnResponse(0, err.getMsg(), "error", null, call);
+    }
+
+    
+    @Override 
+    void onCancel() {
+        payTabsHelper.returnQueryResponse(0, "Cancelled", "event", null, call);
+    }
+
+    @Override 
+    void onResult(TransactionResponseBody transactionResponseBody) {
+        payTabsHelper.returnQueryResponse(200, "success", "success", transactionResponseBody, call);
     }
 
     @PluginMethod
