@@ -244,7 +244,11 @@ configuration.alternativePaymentMethods = [cordova.plugins.CordovaPaymentPlugin.
 <docgen-index>
 
 * [`startCardPayment(...)`](#startcardpayment)
+* [`startTokenizedCardPayment(...)`](#starttokenizedcardpayment)
+* [`start3DSecureTokenizedCardPayment(...)`](#start3dsecuretokenizedcardpayment)
+* [`startPaymentWithSavedCards(...)`](#startpaymentwithsavedcards)
 * [`startApplePayPayment(...)`](#startapplepaypayment)
+* [`queryTransaction(...)`](#querytransaction)
 * [`startAlternativePaymentMethod(...)`](#startalternativepaymentmethod)
 * [Interfaces](#interfaces)
 
@@ -256,14 +260,64 @@ configuration.alternativePaymentMethods = [cordova.plugins.CordovaPaymentPlugin.
 ### startCardPayment(...)
 
 ```typescript
-startCardPayment(options: PaymentSDKConfiguration) => any
+startCardPayment(options: PaymentSDKConfiguration) => Promise<any>
 ```
 
 | Param         | Type                                                                        |
 | ------------- | --------------------------------------------------------------------------- |
 | **`options`** | <code><a href="#paymentsdkconfiguration">PaymentSDKConfiguration</a></code> |
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
+### startTokenizedCardPayment(...)
+
+```typescript
+startTokenizedCardPayment(options: PaymentSDKConfiguration, token: string, transactionRef: string) => Promise<any>
+```
+
+| Param                | Type                                                                        |
+| -------------------- | --------------------------------------------------------------------------- |
+| **`options`**        | <code><a href="#paymentsdkconfiguration">PaymentSDKConfiguration</a></code> |
+| **`token`**          | <code>string</code>                                                         |
+| **`transactionRef`** | <code>string</code>                                                         |
+
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
+### start3DSecureTokenizedCardPayment(...)
+
+```typescript
+start3DSecureTokenizedCardPayment(options: PaymentSDKConfiguration, savedCardInfo: PaymentSDKSavedCardInfo, token: string) => Promise<any>
+```
+
+| Param               | Type                                                                        |
+| ------------------- | --------------------------------------------------------------------------- |
+| **`options`**       | <code><a href="#paymentsdkconfiguration">PaymentSDKConfiguration</a></code> |
+| **`savedCardInfo`** | <code><a href="#paymentsdksavedcardinfo">PaymentSDKSavedCardInfo</a></code> |
+| **`token`**         | <code>string</code>                                                         |
+
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
+### startPaymentWithSavedCards(...)
+
+```typescript
+startPaymentWithSavedCards(options: PaymentSDKConfiguration, support3ds: boolean) => Promise<any>
+```
+
+| Param            | Type                                                                        |
+| ---------------- | --------------------------------------------------------------------------- |
+| **`options`**    | <code><a href="#paymentsdkconfiguration">PaymentSDKConfiguration</a></code> |
+| **`support3ds`** | <code>boolean</code>                                                        |
+
+**Returns:** <code>Promise&lt;any&gt;</code>
 
 --------------------
 
@@ -271,14 +325,29 @@ startCardPayment(options: PaymentSDKConfiguration) => any
 ### startApplePayPayment(...)
 
 ```typescript
-startApplePayPayment(options: PaymentSDKConfiguration) => any
+startApplePayPayment(options: PaymentSDKConfiguration) => Promise<any>
 ```
 
 | Param         | Type                                                                        |
 | ------------- | --------------------------------------------------------------------------- |
 | **`options`** | <code><a href="#paymentsdkconfiguration">PaymentSDKConfiguration</a></code> |
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
+### queryTransaction(...)
+
+```typescript
+queryTransaction(options: PaymentSDKQueryConfiguration) => Promise<any>
+```
+
+| Param         | Type                                                                                  |
+| ------------- | ------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#paymentsdkqueryconfiguration">PaymentSDKQueryConfiguration</a></code> |
+
+**Returns:** <code>Promise&lt;any&gt;</code>
 
 --------------------
 
@@ -286,14 +355,14 @@ startApplePayPayment(options: PaymentSDKConfiguration) => any
 ### startAlternativePaymentMethod(...)
 
 ```typescript
-startAlternativePaymentMethod(options: PaymentSDKConfiguration) => any
+startAlternativePaymentMethod(options: PaymentSDKConfiguration) => Promise<any>
 ```
 
 | Param         | Type                                                                        |
 | ------------- | --------------------------------------------------------------------------- |
 | **`options`** | <code><a href="#paymentsdkconfiguration">PaymentSDKConfiguration</a></code> |
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;any&gt;</code>
 
 --------------------
 
@@ -394,6 +463,29 @@ startAlternativePaymentMethod(options: PaymentSDKConfiguration) => any
 | **`backgroundColor`**    | <code>string</code> | theme: background color     |
 | **`placeholderColor`**   | <code>string</code> | theme: placeholder color    |
 | **`logoImage`**          | <code>string</code> | theme: logo                 |
+
+
+#### PaymentSDKSavedCardInfo
+
+<a href="#paymentsdksavedcardinfo">PaymentSDKSavedCardInfo</a>
+
+| Prop             | Type                | Description                       |
+| ---------------- | ------------------- | --------------------------------- |
+| **`maskedCard`** | <code>string</code> | maskedCard: Card mask             |
+| **`cardType`**   | <code>string</code> | cardType: card type (visa, mc...) |
+
+
+#### PaymentSDKQueryConfiguration
+
+<a href="#paymentsdkqueryconfiguration">PaymentSDKQueryConfiguration</a>: query request configuration
+
+| Prop                       | Type                | Description                    |
+| -------------------------- | ------------------- | ------------------------------ |
+| **`serverKey`**            | <code>string</code> | merchant server key            |
+| **`clientKey`**            | <code>string</code> | merchant client key            |
+| **`merchantCountryCode`**  | <code>string</code> | merchant country code          |
+| **`profileID`**            | <code>string</code> | merchant profile id            |
+| **`transactionReference`** | <code>string</code> | returned transaction reference |
 
 </docgen-api>
 
