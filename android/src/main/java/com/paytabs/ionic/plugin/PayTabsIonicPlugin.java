@@ -119,12 +119,12 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
 
     
     @Override 
-    void onCancel() {
+    public void onCancel() {
         payTabsHelper.returnQueryResponse(0, "Cancelled", "event", null, call);
     }
 
     @Override 
-    void onResult(TransactionResponseBody transactionResponseBody) {
+    public void onResult(TransactionResponseBody transactionResponseBody) {
         payTabsHelper.returnQueryResponse(200, "success", "success", transactionResponseBody, call);
     }
 
