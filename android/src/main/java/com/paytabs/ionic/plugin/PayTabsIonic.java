@@ -22,6 +22,7 @@ import com.payment.paymentsdk.integrationmodels.PaymentSdkTokenise;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionDetails;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionType;
 import com.payment.paymentsdk.integrationmodels.PaymentSDKQueryConfiguration;
+import com.payment.paymentsdk.sharedclasses.model.response.TransactionResponseBody;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -5,12 +5,14 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.payment.paymentsdk.PaymentSdkActivity;
+import com.payment.paymentsdk.QuerySdkActivity;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkConfigurationDetails;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkError;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionDetails;
+import com.payment.paymentsdk.integrationmodels.PaymentSDKQueryConfiguration;
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface;
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackQueryInterface;
-import com.payment.paymentsdk.QuerySdkActivity;
+import com.payment.paymentsdk.sharedclasses.model.response.TransactionResponseBody;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -43,6 +45,8 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
         this.call = call;
         try {
             PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
+            String token = " ";
+            String transactionRef = " ";
             PaymentSdkActivity.startTokenizedCardPayment(this.getActivity(), configData, token, transactionRef, this);
         } catch (JSONException e) {
             payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
@@ -55,12 +59,7 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
         this.call = call;
         try {
             PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
-            String samsungToken = call.getString("samsungToken");
-
-            if (samsungToken != null && samsungToken.length() > 0)
-                PaymentSdkActivity.startSamsungPayment(this.getActivity(), configData, samsungToken, this);
-            else
-                PaymentSdkActivity.startCardPayment(this.getActivity(), configData, this);
+            PaymentSdkActivity.startCardPayment(this.getActivity(), configData, this);
         } catch (JSONException e) {
             payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
         }
