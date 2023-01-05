@@ -1,5 +1,7 @@
 package com.paytabs.ionic.plugin;
 
+import android.util.Log;
+
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
@@ -42,12 +44,13 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
 
     @PluginMethod
     public void startTokenizedCardPayment(PluginCall call) {
+        Log.e("Plugin Call", call.getData().toString());
         this.call = call;
         try {
             PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
-            String token = " ";
-            String transactionRef = " ";
-            PaymentSdkActivity.startTokenizedCardPayment(this.getActivity(), configData, token, transactionRef, this);
+            String token = call.getString("token");
+            String trxRef = call.getString("transactionReference");
+            PaymentSdkActivity.startTokenizedCardPayment(this.getActivity(), configData, tokenCall, transRefCall, this);
         } catch (JSONException e) {
             payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
         }

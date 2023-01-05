@@ -33,8 +33,8 @@ import java.util.ArrayList;
 public class PayTabsIonic {
 
 
-    public PaymentSdkConfigBuilder createConfiguration(PluginCall paymentDetails) throws JSONException {
-        Log.d("Plugin Call", paymentDetails.getString("profileID"));
+    public PaymentSdkConfigBuilder createConfiguration(PluginCall call) throws JSONException {
+        JSObject paymentDetails= call.getObject("configurations");
         String profileId = paymentDetails.getString("profileID");
         String serverKey = paymentDetails.getString("serverKey");
         String clientKey = paymentDetails.getString("clientKey");
