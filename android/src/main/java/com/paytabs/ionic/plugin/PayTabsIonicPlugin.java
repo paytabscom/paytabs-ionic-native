@@ -47,10 +47,10 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
         Log.e("Plugin Call", call.getData().toString());
         this.call = call;
         try {
-            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
+            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfigurationFromInnerObject(call).build();
             String token = call.getString("token");
             String trxRef = call.getString("transactionReference");
-            PaymentSdkActivity.startTokenizedCardPayment(this.getActivity(), configData, tokenCall, transRefCall, this);
+            PaymentSdkActivity.startTokenizedCardPayment(this.getActivity(), configData, token, trxRef, this);
         } catch (JSONException e) {
             payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
         }
@@ -61,7 +61,7 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
     public void start3DSecureTokenizedCardPayment(PluginCall call) {
         this.call = call;
         try {
-            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
+            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfigurationFromInnerObject(call).build();
             PaymentSdkActivity.startCardPayment(this.getActivity(), configData, this);
         } catch (JSONException e) {
             payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
@@ -74,12 +74,11 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
         this.call = call;
         try {
             PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
-            String samsungToken = call.getString("samsungToken");
-
-            if (samsungToken != null && samsungToken.length() > 0)
-                PaymentSdkActivity.startSamsungPayment(this.getActivity(), configData, samsungToken, this);
-            else
-                PaymentSdkActivity.startCardPayment(this.getActivity(), configData, this);
+            PaymentSdkActivity.startPaymentWithSavedCards(
+                this.getActivity(), 
+                configData,
+                false,
+                 this);
         } catch (JSONException e) {
             payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
         }

@@ -33,8 +33,7 @@ import java.util.ArrayList;
 public class PayTabsIonic {
 
 
-    public PaymentSdkConfigBuilder createConfiguration(PluginCall call) throws JSONException {
-        JSObject paymentDetails= call.getObject("configurations");
+    public PaymentSdkConfigBuilder createConfiguration(PluginCall paymentDetails) throws JSONException {
         String profileId = paymentDetails.getString("profileID");
         String serverKey = paymentDetails.getString("serverKey");
         String clientKey = paymentDetails.getString("clientKey");
@@ -127,6 +126,205 @@ public class PayTabsIonic {
             Log.d("LogoImage", iconUri);
             configData.setMerchantIcon(iconUri);
         }
+
+        return configData;
+    }
+
+
+    public PaymentSdkConfigBuilder createConfigurationFromInnerObject(PluginCall call) throws JSONException {
+        JSObject paymentDetails= call.getObject("configurations");
+        String profileId = paymentDetails.getString("profileID");
+        String serverKey = paymentDetails.getString("serverKey");
+        String clientKey = paymentDetails.getString("clientKey");
+
+        String screenTitle = paymentDetails.getString("screenTitle");
+        String orderId = paymentDetails.getString("cartID");
+        String cartDesc = paymentDetails.getString("cartDescription");
+        String currency = paymentDetails.getString("currency");
+        String token = paymentDetails.getString("token");
+        String transRef = paymentDetails.getString("transactionReference");
+        double amount = paymentDetails.getDouble("amount");
+
+        JSObject billingDetails = paymentDetails.getJSObject("billingDetails");
+        PaymentSdkBillingDetails billingData = null;
+        if(billingDetails != null) {
+            billingData = new PaymentSdkBillingDetails(
+                    billingDetails.getString("city"),
+                    billingDetails.getString("countryCode"),
+                    billingDetails.getString("email"),
+                    billingDetails.getString("name"),
+                    billingDetails.getString("phone"), billingDetails.getString("state"),
+                    billingDetails.getString("addressLine"), billingDetails.getString("zip")
+            );
+        }
+        JSObject shippingDetails = paymentDetails.getJSObject("shippingDetails");
+        PaymentSdkShippingDetails shippingData = null;
+        if(shippingDetails != null ) {
+            shippingData = new PaymentSdkShippingDetails(
+                    shippingDetails.getString("city"),
+                    shippingDetails.getString("countryCode"),
+                    shippingDetails.getString("email"),
+                    shippingDetails.getString("name"),
+                    shippingDetails.getString("phone"), shippingDetails.getString("state"),
+                    shippingDetails.getString("addressLine"), shippingDetails.getString("zip")
+            );
+        }
+        JSObject apmsJSONArray = paymentDetails.getJSObject("alternativePaymentMethods");
+        ArrayList<PaymentSdkApms> apmsList = new ArrayList<PaymentSdkApms>();
+        // if (apmsJSONArray != null) {
+        //     apmsList =  createAPMs(apmsJSONArray);
+        // }
+
+        PaymentSdkConfigBuilder configData = new PaymentSdkConfigBuilder(
+                profileId, serverKey, clientKey, amount, currency)
+                .setCartDescription(cartDesc)
+                .setBillingData(billingData)
+                .setMerchantCountryCode(paymentDetails.getString("merchantCountryCode"))
+                .setShippingData(shippingData)
+                .setCartId(orderId)
+                .setTokenisationData(token, transRef)
+                .setScreenTitle(screenTitle)
+                .setAlternativePaymentMethods(apmsList);
+
+        if (paymentDetails.getBool("forceShippingInfo") != null) {
+            configData.hideCardScanner(paymentDetails.getBoolean("forceShippingInfo"));
+        }
+
+        if (paymentDetails.getBool("showShippingInfo") != null) {
+            configData.hideCardScanner(paymentDetails.getBoolean("showShippingInfo"));
+        }
+
+        if (paymentDetails.getBool("showBillingInfo") != null) {
+            configData.hideCardScanner(paymentDetails.getBoolean("showBillingInfo"));
+        }
+
+        if (paymentDetails.getBool("hideCardScanner") != null) {
+            configData.hideCardScanner(paymentDetails.getBoolean("hideCardScanner"));
+        }
+
+        if (paymentDetails.getString("transactionType") != null) {
+            PaymentSdkTransactionType transactionType = createPaymentSdkTransactionType(paymentDetails.getString("transactionType"));
+            configData.setTransactionType(transactionType);
+        }
+
+        if ((paymentDetails.getString("tokeniseType") != null) && (paymentDetails.getString("tokenFormat") != null) ) {
+            PaymentSdkTokenise tokeniseType = createPaymentSdkTokenise(paymentDetails.getString("tokeniseType"));
+            PaymentSdkTokenFormat tokenFormat = createPaymentSdkTokenFormat(paymentDetails.getString("tokenFormat"));
+            configData.setTokenise(tokeniseType, tokenFormat);
+        }
+
+        if (paymentDetails.getString("languageCode") != null ){
+            String langaugeCode = paymentDetails.getString("languageCode");
+            PaymentSdkLanguageCode locale = createPaymentSdkLanguageCode(langaugeCode);
+            configData.setLanguageCode(locale);
+        }
+
+        // JSObject themeObjct = paymentDetails.getJSObject("theme");
+        // if  (!themeObjct.isNull("logoImage")) {
+        //     String iconUri = themeObjct.optString("logoImage");
+        //     Log.d("LogoImage", iconUri);
+        //     configData.setMerchantIcon(iconUri);
+        // }
+
+        return configData;
+    }
+
+    // Still need to handle billing and shipping in configurations
+    //TODO handle creating saved card info
+    public PaymentSdkConfigBuilder create(PluginCall call) throws JSONException {
+        JSObject paymentDetails= call.getObject("configurations");
+        String profileId = paymentDetails.getString("profileID");
+        String serverKey = paymentDetails.getString("serverKey");
+        String clientKey = paymentDetails.getString("clientKey");
+
+        String screenTitle = paymentDetails.getString("screenTitle");
+        String orderId = paymentDetails.getString("cartID");
+        String cartDesc = paymentDetails.getString("cartDescription");
+        String currency = paymentDetails.getString("currency");
+        String token = paymentDetails.getString("token");
+        String transRef = paymentDetails.getString("transactionReference");
+        double amount = paymentDetails.getDouble("amount");
+
+        JSObject billingDetails = paymentDetails.getJSObject("billingDetails");
+        PaymentSdkBillingDetails billingData = null;
+        if(billingDetails != null) {
+            billingData = new PaymentSdkBillingDetails(
+                    billingDetails.getString("city"),
+                    billingDetails.getString("countryCode"),
+                    billingDetails.getString("email"),
+                    billingDetails.getString("name"),
+                    billingDetails.getString("phone"), billingDetails.getString("state"),
+                    billingDetails.getString("addressLine"), billingDetails.getString("zip")
+            );
+        }
+        JSObject shippingDetails = paymentDetails.getJSObject("shippingDetails");
+        PaymentSdkShippingDetails shippingData = null;
+        if(shippingDetails != null ) {
+            shippingData = new PaymentSdkShippingDetails(
+                    shippingDetails.getString("city"),
+                    shippingDetails.getString("countryCode"),
+                    shippingDetails.getString("email"),
+                    shippingDetails.getString("name"),
+                    shippingDetails.getString("phone"), shippingDetails.getString("state"),
+                    shippingDetails.getString("addressLine"), shippingDetails.getString("zip")
+            );
+        }
+        JSObject apmsJSONArray = paymentDetails.getJSObject("alternativePaymentMethods");
+        ArrayList<PaymentSdkApms> apmsList = new ArrayList<PaymentSdkApms>();
+        // if (apmsJSONArray != null) {
+        //     apmsList =  createAPMs(apmsJSONArray);
+        // }
+
+        PaymentSdkConfigBuilder configData = new PaymentSdkConfigBuilder(
+                profileId, serverKey, clientKey, amount, currency)
+                .setCartDescription(cartDesc)
+                .setBillingData(billingData)
+                .setMerchantCountryCode(paymentDetails.getString("merchantCountryCode"))
+                .setShippingData(shippingData)
+                .setCartId(orderId)
+                .setTokenisationData(token, transRef)
+                .setScreenTitle(screenTitle)
+                .setAlternativePaymentMethods(apmsList);
+
+        if (paymentDetails.getBool("forceShippingInfo") != null) {
+            configData.hideCardScanner(paymentDetails.getBoolean("forceShippingInfo"));
+        }
+
+        if (paymentDetails.getBool("showShippingInfo") != null) {
+            configData.hideCardScanner(paymentDetails.getBoolean("showShippingInfo"));
+        }
+
+        if (paymentDetails.getBool("showBillingInfo") != null) {
+            configData.hideCardScanner(paymentDetails.getBoolean("showBillingInfo"));
+        }
+
+        if (paymentDetails.getBool("hideCardScanner") != null) {
+            configData.hideCardScanner(paymentDetails.getBoolean("hideCardScanner"));
+        }
+
+        if (paymentDetails.getString("transactionType") != null) {
+            PaymentSdkTransactionType transactionType = createPaymentSdkTransactionType(paymentDetails.getString("transactionType"));
+            configData.setTransactionType(transactionType);
+        }
+
+        if ((paymentDetails.getString("tokeniseType") != null) && (paymentDetails.getString("tokenFormat") != null) ) {
+            PaymentSdkTokenise tokeniseType = createPaymentSdkTokenise(paymentDetails.getString("tokeniseType"));
+            PaymentSdkTokenFormat tokenFormat = createPaymentSdkTokenFormat(paymentDetails.getString("tokenFormat"));
+            configData.setTokenise(tokeniseType, tokenFormat);
+        }
+
+        if (paymentDetails.getString("languageCode") != null ){
+            String langaugeCode = paymentDetails.getString("languageCode");
+            PaymentSdkLanguageCode locale = createPaymentSdkLanguageCode(langaugeCode);
+            configData.setLanguageCode(locale);
+        }
+
+        // JSObject themeObjct = paymentDetails.getJSObject("theme");
+        // if  (!themeObjct.isNull("logoImage")) {
+        //     String iconUri = themeObjct.optString("logoImage");
+        //     Log.d("LogoImage", iconUri);
+        //     configData.setMerchantIcon(iconUri);
+        // }
 
         return configData;
     }

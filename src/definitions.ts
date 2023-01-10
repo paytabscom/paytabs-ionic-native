@@ -35,6 +35,9 @@ export interface PaymentSDKQueryConfiguration{
   transactionReference: string;
 }
 
+/**
+* PaymentSDKTokenizationArgument: tokenization configuration
+*/
 export interface PaymentSDKTokenizationArgument{
   /**
   * payment configurations
