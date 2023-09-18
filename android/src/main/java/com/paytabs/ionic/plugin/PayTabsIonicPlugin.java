@@ -1,16 +1,20 @@
 package com.paytabs.ionic.plugin;
 
+import android.util.Log;
+
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.payment.paymentsdk.PaymentSdkActivity;
+import com.payment.paymentsdk.QuerySdkActivity;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkConfigurationDetails;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkError;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionDetails;
+import com.payment.paymentsdk.integrationmodels.PaymentSDKQueryConfiguration;
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface;
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackQueryInterface;
-import com.payment.paymentsdk.QuerySdkActivity;
+import com.payment.paymentsdk.sharedclasses.model.response.TransactionResponseBody;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -40,10 +44,13 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
 
     @PluginMethod
     public void startTokenizedCardPayment(PluginCall call) {
+        Log.e("Plugin Call", call.getData().toString());
         this.call = call;
         try {
-            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
-            PaymentSdkActivity.startTokenizedCardPayment(this.getActivity(), configData, token, transactionRef, this);
+            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfigurationFromInnerObject(call).build();
+            String token = call.getString("token");
+            String trxRef = call.getString("transactionReference");
+            PaymentSdkActivity.startTokenizedCardPayment(this.getActivity(), configData, token, trxRef, this);
         } catch (JSONException e) {
             payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
         }
@@ -54,13 +61,8 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
     public void start3DSecureTokenizedCardPayment(PluginCall call) {
         this.call = call;
         try {
-            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
-            String samsungToken = call.getString("samsungToken");
-
-            if (samsungToken != null && samsungToken.length() > 0)
-                PaymentSdkActivity.startSamsungPayment(this.getActivity(), configData, samsungToken, this);
-            else
-                PaymentSdkActivity.startCardPayment(this.getActivity(), configData, this);
+            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfigurationFromInnerObject(call).build();
+            PaymentSdkActivity.startCardPayment(this.getActivity(), configData, this);
         } catch (JSONException e) {
             payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
         }
@@ -72,12 +74,11 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
         this.call = call;
         try {
             PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
-            String samsungToken = call.getString("samsungToken");
-
-            if (samsungToken != null && samsungToken.length() > 0)
-                PaymentSdkActivity.startSamsungPayment(this.getActivity(), configData, samsungToken, this);
-            else
-                PaymentSdkActivity.startCardPayment(this.getActivity(), configData, this);
+            PaymentSdkActivity.startPaymentWithSavedCards(
+                this.getActivity(), 
+                configData,
+                false,
+                 this);
         } catch (JSONException e) {
             payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
         }
@@ -120,12 +121,12 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
 
     
     @Override 
-    void onCancel() {
+    public void onCancel() {
         payTabsHelper.returnQueryResponse(0, "Cancelled", "event", null, call);
     }
 
     @Override 
-    void onResult(TransactionResponseBody transactionResponseBody) {
+    public void onResult(TransactionResponseBody transactionResponseBody) {
         payTabsHelper.returnQueryResponse(200, "success", "success", transactionResponseBody, call);
     }
 

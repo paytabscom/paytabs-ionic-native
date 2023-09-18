@@ -275,14 +275,12 @@ startCardPayment(options: PaymentSDKConfiguration) => Promise<any>
 ### startTokenizedCardPayment(...)
 
 ```typescript
-startTokenizedCardPayment(options: PaymentSDKConfiguration, token: string, transactionRef: string) => Promise<any>
+startTokenizedCardPayment(options: PaymentSDKTokenizationArgument) => Promise<any>
 ```
 
-| Param                | Type                                                                        |
-| -------------------- | --------------------------------------------------------------------------- |
-| **`options`**        | <code><a href="#paymentsdkconfiguration">PaymentSDKConfiguration</a></code> |
-| **`token`**          | <code>string</code>                                                         |
-| **`transactionRef`** | <code>string</code>                                                         |
+| Param         | Type                                                                                      |
+| ------------- | ----------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#paymentsdktokenizationargument">PaymentSDKTokenizationArgument</a></code> |
 
 **Returns:** <code>Promise&lt;any&gt;</code>
 
@@ -463,6 +461,17 @@ startAlternativePaymentMethod(options: PaymentSDKConfiguration) => Promise<any>
 | **`backgroundColor`**    | <code>string</code> | theme: background color     |
 | **`placeholderColor`**   | <code>string</code> | theme: placeholder color    |
 | **`logoImage`**          | <code>string</code> | theme: logo                 |
+
+
+#### PaymentSDKTokenizationArgument
+
+<a href="#paymentsdktokenizationargument">PaymentSDKTokenizationArgument</a>: tokenization configuration
+
+| Prop                       | Type                                                                        | Description            |
+| -------------------------- | --------------------------------------------------------------------------- | ---------------------- |
+| **`configurations`**       | <code><a href="#paymentsdkconfiguration">PaymentSDKConfiguration</a></code> | payment configurations |
+| **`token`**                | <code>string</code>                                                         | trx token              |
+| **`transactionReference`** | <code>string</code>                                                         | transaction reference  |
 
 
 #### PaymentSDKSavedCardInfo

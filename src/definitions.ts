@@ -1,6 +1,6 @@
 export interface PayTabsIonicPlugin {
   startCardPayment(options: PaymentSDKConfiguration): Promise<any>;
-  startTokenizedCardPayment(options: PaymentSDKConfiguration, token: string, transactionRef:string): Promise<any>;
+  startTokenizedCardPayment(options: PaymentSDKTokenizationArgument): Promise<any>;
   start3DSecureTokenizedCardPayment(options: PaymentSDKConfiguration, savedCardInfo: PaymentSDKSavedCardInfo, token: string): Promise<any>;
   startPaymentWithSavedCards(options: PaymentSDKConfiguration, support3ds: boolean): Promise<any>;
   startApplePayPayment(options: PaymentSDKConfiguration): Promise<any>;
@@ -31,6 +31,24 @@ export interface PaymentSDKQueryConfiguration{
   profileID: string;
   /**
   * returned transaction reference
+  */
+  transactionReference: string;
+}
+
+/**
+* PaymentSDKTokenizationArgument: tokenization configuration
+*/
+export interface PaymentSDKTokenizationArgument{
+  /**
+  * payment configurations
+  */
+  configurations: PaymentSDKConfiguration;
+  /**
+  * trx token
+  */
+  token: string;
+  /**
+  * transaction reference
   */
   transactionReference: string;
 }
