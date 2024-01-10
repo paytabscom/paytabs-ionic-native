@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import 'paytabs-ionic-native';
 // eslint-disable-next-line max-len
-import { PaymentSDKBillingDetails, PaymentSDKShippingDetails, PaymentSDKConfiguration, PayTabsIonic } from 'paytabs-ionic-native';
+import { PaymentSDKBillingDetails, PaymentSDKShippingDetails, PaymentSDKConfiguration, PayTabsIonic, AlternativePaymentMethod } from 'paytabs-ionic-native';
 
 @Component({
   selector: 'app-home',

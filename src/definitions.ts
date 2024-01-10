@@ -459,5 +459,9 @@ export enum AlternativePaymentMethod {
   /**
   * fawry: for supporting payment with fawry
   */  
-  fawry = "fawry"
+  fawry = "fawry",
+  /**
+  * tabby: for supporting payment with tabby
+  */  
+  tabby = "tabby"
 }

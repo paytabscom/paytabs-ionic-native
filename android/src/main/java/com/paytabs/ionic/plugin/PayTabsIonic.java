@@ -13,6 +13,7 @@ import com.getcapacitor.JSObject;
 import com.getcapacitor.PluginCall;
 import com.google.gson.Gson;
 import com.payment.paymentsdk.PaymentSdkConfigBuilder;
+import com.payment.paymentsdk.integrationmodels.PaymentSDKQueryConfiguration;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkApms;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkBillingDetails;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkLanguageCode;
@@ -21,7 +22,6 @@ import com.payment.paymentsdk.integrationmodels.PaymentSdkTokenFormat;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTokenise;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionDetails;
 import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionType;
-import com.payment.paymentsdk.integrationmodels.PaymentSDKQueryConfiguration;
 import com.payment.paymentsdk.sharedclasses.model.response.TransactionResponseBody;
 
 import org.json.JSONArray;
@@ -48,7 +48,7 @@ public class PayTabsIonic {
 
         JSObject billingDetails = paymentDetails.getObject("billingDetails");
         PaymentSdkBillingDetails billingData = null;
-        if(billingDetails != null) {
+        if (billingDetails != null) {
             billingData = new PaymentSdkBillingDetails(
                     billingDetails.getString("city"),
                     billingDetails.getString("countryCode"),
@@ -60,7 +60,7 @@ public class PayTabsIonic {
         }
         JSObject shippingDetails = paymentDetails.getObject("shippingDetails");
         PaymentSdkShippingDetails shippingData = null;
-        if(shippingDetails != null ) {
+        if (shippingDetails != null) {
             shippingData = new PaymentSdkShippingDetails(
                     shippingDetails.getString("city"),
                     shippingDetails.getString("countryCode"),
@@ -73,7 +73,7 @@ public class PayTabsIonic {
         JSArray apmsJSONArray = paymentDetails.getArray("alternativePaymentMethods");
         ArrayList<PaymentSdkApms> apmsList = new ArrayList<PaymentSdkApms>();
         if (apmsJSONArray != null) {
-            apmsList =  createAPMs(apmsJSONArray);
+            apmsList = createAPMs(apmsJSONArray);
         }
 
         PaymentSdkConfigBuilder configData = new PaymentSdkConfigBuilder(
@@ -108,21 +108,21 @@ public class PayTabsIonic {
             configData.setTransactionType(transactionType);
         }
 
-        if ((paymentDetails.getString("tokeniseType") != null) && (paymentDetails.getString("tokenFormat") != null) ) {
+        if ((paymentDetails.getString("tokeniseType") != null) && (paymentDetails.getString("tokenFormat") != null)) {
             PaymentSdkTokenise tokeniseType = createPaymentSdkTokenise(paymentDetails.getString("tokeniseType"));
             PaymentSdkTokenFormat tokenFormat = createPaymentSdkTokenFormat(paymentDetails.getString("tokenFormat"));
             configData.setTokenise(tokeniseType, tokenFormat);
         }
 
-        if (paymentDetails.getString("languageCode") != null ){
+        if (paymentDetails.getString("languageCode") != null) {
             String langaugeCode = paymentDetails.getString("languageCode");
             PaymentSdkLanguageCode locale = createPaymentSdkLanguageCode(langaugeCode);
             configData.setLanguageCode(locale);
         }
 
-        JSObject themeObjct = paymentDetails.getObject("theme");
-        if  (!themeObjct.isNull("logoImage")) {
-            String iconUri = themeObjct.optString("logoImage");
+        JSObject themeObject = paymentDetails.getObject("theme");
+        if (themeObject != null && !themeObject.isNull("logoImage")) {
+            String iconUri = themeObject.optString("logoImage");
             Log.d("LogoImage", iconUri);
             configData.setMerchantIcon(iconUri);
         }
@@ -132,7 +132,7 @@ public class PayTabsIonic {
 
 
     public PaymentSdkConfigBuilder createConfigurationFromInnerObject(PluginCall call) throws JSONException {
-        JSObject paymentDetails= call.getObject("configurations");
+        JSObject paymentDetails = call.getObject("configurations");
         String profileId = paymentDetails.getString("profileID");
         String serverKey = paymentDetails.getString("serverKey");
         String clientKey = paymentDetails.getString("clientKey");
@@ -147,7 +147,7 @@ public class PayTabsIonic {
 
         JSObject billingDetails = paymentDetails.getJSObject("billingDetails");
         PaymentSdkBillingDetails billingData = null;
-        if(billingDetails != null) {
+        if (billingDetails != null) {
             billingData = new PaymentSdkBillingDetails(
                     billingDetails.getString("city"),
                     billingDetails.getString("countryCode"),
@@ -159,7 +159,7 @@ public class PayTabsIonic {
         }
         JSObject shippingDetails = paymentDetails.getJSObject("shippingDetails");
         PaymentSdkShippingDetails shippingData = null;
-        if(shippingDetails != null ) {
+        if (shippingDetails != null) {
             shippingData = new PaymentSdkShippingDetails(
                     shippingDetails.getString("city"),
                     shippingDetails.getString("countryCode"),
@@ -207,13 +207,13 @@ public class PayTabsIonic {
             configData.setTransactionType(transactionType);
         }
 
-        if ((paymentDetails.getString("tokeniseType") != null) && (paymentDetails.getString("tokenFormat") != null) ) {
+        if ((paymentDetails.getString("tokeniseType") != null) && (paymentDetails.getString("tokenFormat") != null)) {
             PaymentSdkTokenise tokeniseType = createPaymentSdkTokenise(paymentDetails.getString("tokeniseType"));
             PaymentSdkTokenFormat tokenFormat = createPaymentSdkTokenFormat(paymentDetails.getString("tokenFormat"));
             configData.setTokenise(tokeniseType, tokenFormat);
         }
 
-        if (paymentDetails.getString("languageCode") != null ){
+        if (paymentDetails.getString("languageCode") != null) {
             String langaugeCode = paymentDetails.getString("languageCode");
             PaymentSdkLanguageCode locale = createPaymentSdkLanguageCode(langaugeCode);
             configData.setLanguageCode(locale);
@@ -232,7 +232,7 @@ public class PayTabsIonic {
     // Still need to handle billing and shipping in configurations
     //TODO handle creating saved card info
     public PaymentSdkConfigBuilder create(PluginCall call) throws JSONException {
-        JSObject paymentDetails= call.getObject("configurations");
+        JSObject paymentDetails = call.getObject("configurations");
         String profileId = paymentDetails.getString("profileID");
         String serverKey = paymentDetails.getString("serverKey");
         String clientKey = paymentDetails.getString("clientKey");
@@ -247,7 +247,7 @@ public class PayTabsIonic {
 
         JSObject billingDetails = paymentDetails.getJSObject("billingDetails");
         PaymentSdkBillingDetails billingData = null;
-        if(billingDetails != null) {
+        if (billingDetails != null) {
             billingData = new PaymentSdkBillingDetails(
                     billingDetails.getString("city"),
                     billingDetails.getString("countryCode"),
@@ -259,7 +259,7 @@ public class PayTabsIonic {
         }
         JSObject shippingDetails = paymentDetails.getJSObject("shippingDetails");
         PaymentSdkShippingDetails shippingData = null;
-        if(shippingDetails != null ) {
+        if (shippingDetails != null) {
             shippingData = new PaymentSdkShippingDetails(
                     shippingDetails.getString("city"),
                     shippingDetails.getString("countryCode"),
@@ -307,13 +307,13 @@ public class PayTabsIonic {
             configData.setTransactionType(transactionType);
         }
 
-        if ((paymentDetails.getString("tokeniseType") != null) && (paymentDetails.getString("tokenFormat") != null) ) {
+        if ((paymentDetails.getString("tokeniseType") != null) && (paymentDetails.getString("tokenFormat") != null)) {
             PaymentSdkTokenise tokeniseType = createPaymentSdkTokenise(paymentDetails.getString("tokeniseType"));
             PaymentSdkTokenFormat tokenFormat = createPaymentSdkTokenFormat(paymentDetails.getString("tokenFormat"));
             configData.setTokenise(tokeniseType, tokenFormat);
         }
 
-        if (paymentDetails.getString("languageCode") != null ){
+        if (paymentDetails.getString("languageCode") != null) {
             String langaugeCode = paymentDetails.getString("languageCode");
             PaymentSdkLanguageCode locale = createPaymentSdkLanguageCode(langaugeCode);
             configData.setLanguageCode(locale);
@@ -339,6 +339,7 @@ public class PayTabsIonic {
         }
         return apmsList;
     }
+
     void returnResponse(int code, String msg, String status, PaymentSdkTransactionDetails data, PluginCall pluginCall) {
         JSObject json = new JSObject();
         if (data != null) {
@@ -360,7 +361,7 @@ public class PayTabsIonic {
         pluginCall.reject(msg);
     }
 
-        public PaymentSDKQueryConfiguration createQueryConfiguration(PluginCall paymentDetails) throws JSONException {
+    public PaymentSDKQueryConfiguration createQueryConfiguration(PluginCall paymentDetails) throws JSONException {
         Log.d("Plugin Call", paymentDetails.getString("profileID"));
         String profileId = paymentDetails.getString("profileID");
         String serverKey = paymentDetails.getString("serverKey");
@@ -373,7 +374,7 @@ public class PayTabsIonic {
         return configData;
     }
 
-    
+
     void returnQueryResponse(int code, String msg, String status, TransactionResponseBody data, PluginCall pluginCall) {
         JSObject json = new JSObject();
         if (data != null) {
