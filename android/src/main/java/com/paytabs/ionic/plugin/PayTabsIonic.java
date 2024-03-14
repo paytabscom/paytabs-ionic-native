@@ -8,20 +8,13 @@ import static com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionType
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PluginCall;
 import com.google.gson.Gson;
 import com.payment.paymentsdk.PaymentSdkConfigBuilder;
-import com.payment.paymentsdk.integrationmodels.PaymentSDKQueryConfiguration;
-import com.payment.paymentsdk.integrationmodels.PaymentSdkApms;
-import com.payment.paymentsdk.integrationmodels.PaymentSdkBillingDetails;
-import com.payment.paymentsdk.integrationmodels.PaymentSdkLanguageCode;
-import com.payment.paymentsdk.integrationmodels.PaymentSdkShippingDetails;
-import com.payment.paymentsdk.integrationmodels.PaymentSdkTokenFormat;
-import com.payment.paymentsdk.integrationmodels.PaymentSdkTokenise;
-import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionDetails;
-import com.payment.paymentsdk.integrationmodels.PaymentSdkTransactionType;
+import com.payment.paymentsdk.integrationmodels.*;
 import com.payment.paymentsdk.sharedclasses.model.response.TransactionResponseBody;
 
 import org.json.JSONArray;
@@ -29,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PayTabsIonic {
 
@@ -134,9 +128,30 @@ public class PayTabsIonic {
         if(paymentDetails.getBoolean("isDigitalProduct") != null){
             configData.isDigitalProduct(paymentDetails.getBoolean("isDigitalProduct"));
         }
+        if (paymentDetails.getArray("cardDiscounts") != null) {
+            configData.setCardDiscount(getPaymentSdkCardDiscounts(paymentDetails.getArray("cardDiscounts")));
+        }
         return configData;
     }
 
+    @NonNull
+    private static List<PaymentSdkCardDiscount> getPaymentSdkCardDiscounts(JSArray ptCardDiscounts) {
+        final List<PaymentSdkCardDiscount> paymentSdkCardDiscounts = new ArrayList<>();
+            for (int i = 0; i < ptCardDiscounts.length(); i++) {
+                final JSONObject discount = ptCardDiscounts.optJSONObject(i);
+                final JSONArray cardsPrefixes = discount.optJSONArray("discountCards");
+                final List<String> cards = new ArrayList<>();
+                if (cardsPrefixes != null) {
+                    for (int j = 0; j < cardsPrefixes.length(); j++) {
+                        cards.add(cardsPrefixes.optString(j));
+                    }
+                }
+                final PaymentSdkCardDiscount cardDiscount = new PaymentSdkCardDiscount(cards, discount.optDouble("discountValue"),
+                        discount.optString("discountTitle"), discount.optBoolean("isPercentage"));
+                paymentSdkCardDiscounts.add(cardDiscount);
+            }
+        return paymentSdkCardDiscounts;
+    }
 
     public PaymentSdkConfigBuilder createConfigurationFromInnerObject(PluginCall call) throws JSONException {
         JSObject paymentDetails = call.getObject("configurations");
