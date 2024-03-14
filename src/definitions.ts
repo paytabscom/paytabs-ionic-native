@@ -181,6 +181,8 @@ export interface PaymentSDKConfiguration {
   * list of alternative payment methods
   */
   alternativePaymentMethods?: [string];
+
+  cardDiscounts?: [PaymentSDKCardDiscount];
 }
 
 /**
@@ -468,4 +470,29 @@ export enum AlternativePaymentMethod {
   * tabby: for supporting payment with tabby
   */  
   tabby = "tabby"
+}
+
+/**
+ * PaymentSDKCardDiscount: Represents a discount that can be applied to a card payment.
+ */
+export interface PaymentSDKCardDiscount {
+  /**
+   * discountCards: An array of strings representing the cards that the discount can be applied to.
+   */
+  discountCards: string[];
+
+  /**
+   * discountValue: The value of the discount. This could be a flat amount or a percentage depending on the value of 'isPercentage'.
+   */
+  discountValue: number;
+
+  /**
+   * discountTitle: The title or name of the discount.
+   */
+  discountTitle: string;
+
+  /**
+   * isPercentage: A boolean indicating whether the discount value is a percentage (true) or a flat amount (false).
+   */
+  isPercentage: boolean;
 }
