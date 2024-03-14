@@ -146,21 +146,25 @@ export interface PaymentSDKConfiguration {
   */
   hideCardScanner?: string;
   /**
-  * merchant apple pay bundle id
+  * merchant Apple Pay bundle id
   */
   merchantApplePayIdentifier?: string;
   /**
-  * minize the vlaidation on apple pay billing and shipping info
+  * minimize the validation on Apple Pay billing and shipping info
   */
   simplifyApplePayValidation?: string;
   /**
-  * supported apple pay networks
+  * supported Apple Pay networks
   */
   supportedApplePayNetworks?: [string];
   /**
   * returned token 
   */
   token?: string;
+  /**
+   * is digital product
+   */
+  isDigitalProduct?: boolean;
   /**
   * returned transaction reference
   */
@@ -345,7 +349,7 @@ export interface PaymentSDKSavedCardInfo {
    cardType?: string;
 } 
 /**
-* TokeniseType: define the behaviour of of saving card option inside the SDKs.
+* TokeniseType: define the behaviour of saving card option inside the SDKs.
 */
 export enum TokeniseType {
   /**

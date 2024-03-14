@@ -91,6 +91,10 @@ public class PayTabsIonic {
             configData.hideCardScanner(paymentDetails.getBoolean("forceShippingInfo"));
         }
 
+        if (paymentDetails.getBoolean("isDigitalProduct") != null) {
+            configData.isDigitalProduct(paymentDetails.getBoolean("isDigitalProduct"));
+        }
+
         if (paymentDetails.getBoolean("showShippingInfo") != null) {
             configData.hideCardScanner(paymentDetails.getBoolean("showShippingInfo"));
         }
@@ -127,6 +131,9 @@ public class PayTabsIonic {
             configData.setMerchantIcon(iconUri);
         }
 
+        if(paymentDetails.getBoolean("isDigitalProduct") != null){
+            configData.isDigitalProduct(paymentDetails.getBoolean("isDigitalProduct"));
+        }
         return configData;
     }
 

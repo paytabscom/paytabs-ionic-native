@@ -15,4 +15,4 @@ include ':capacitor-status-bar'
 project(':capacitor-status-bar').projectDir = new File('../node_modules/@capacitor/status-bar/android')
 
 include ':paytabs-ionic-native'
-project(':paytabs-ionic-native').projectDir = new File('../../android')
+project(':paytabs-ionic-native').projectDir = new File('../../node_modules/paytabs-ionic-native/android')

@@ -1,6 +1,6 @@
 {
   "name": "paytabs-ionic-native",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Ionic Native paytabs library is a wrapper for the native PayTabs Android and iOS SDKs, It helps you integrate with PayTabs seamlessly.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -75,8 +75,5 @@
     "android": {
       "src": "android"
     }
-  },
-  "dependencies": {
-    "paytabs-ionic-native": "^1.0.0"
   }
 }

@@ -1,5 +1,5 @@
 # paytabs-ionic-native
-![Version](https://img.shields.io/badge/PayTabs%20Ionic%20Native-v1.0.2-green)
+![Version](https://img.shields.io/badge/PayTabs%20Ionic%20Native-v1.0.3-green)
 
 PayTabs Ionic Native library is a wrapper for the native PayTabs Android and iOS SDKs, It helps you integrate with PayTabs seamlessly.
 
@@ -372,38 +372,39 @@ startAlternativePaymentMethod(options: PaymentSDKConfiguration) => Promise<any>
 
 <a href="#paymentsdkconfiguration">PaymentSDKConfiguration</a>: payment request configuration
 
-| Prop                             | Type                                                                            | Description                                                   |
-| -------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| **`profileID`**                  | <code>string</code>                                                             | merchant profile id                                           |
-| **`serverKey`**                  | <code>string</code>                                                             | merchant server key                                           |
-| **`clientKey`**                  | <code>string</code>                                                             | merchant client key                                           |
-| **`transactionType`**            | <code>string</code>                                                             | transaction type: refer to TransactionType enum               |
-| **`transactionClass`**           | <code>string</code>                                                             | transaction class: refer to TransactionClass enum             |
-| **`cartID`**                     | <code>string</code>                                                             | order or cart id                                              |
-| **`currency`**                   | <code>string</code>                                                             | payment currency                                              |
-| **`amount`**                     | <code>number</code>                                                             | amount                                                        |
-| **`cartDescription`**            | <code>string</code>                                                             | order or cart description                                     |
-| **`languageCode`**               | <code>string</code>                                                             | user interface language code(en, ar, ..)                      |
-| **`forceShippingInfo`**          | <code>boolean</code>                                                            | validate shipping info                                        |
-| **`showBillingInfo`**            | <code>boolean</code>                                                            | validate billing info                                         |
-| **`showShippingInfo`**           | <code>boolean</code>                                                            | handle missing shipping info by showing shipping info section |
-| **`billingDetails`**             | <code><a href="#paymentsdkbillingdetails">PaymentSDKBillingDetails</a></code>   | configured billing details                                    |
-| **`shippingDetails`**            | <code><a href="#paymentsdkshippingdetails">PaymentSDKShippingDetails</a></code> | configured shipping details                                   |
-| **`merchantCountryCode`**        | <code>string</code>                                                             | merchant country code                                         |
-| **`screenTitle`**                | <code>string</code>                                                             | title of the screen                                           |
-| **`merchantName`**               | <code>string</code>                                                             | merchant name                                                 |
-| **`serverIP`**                   | <code>string</code>                                                             | server ip                                                     |
-| **`tokeniseType`**               | <code>string</code>                                                             | tokenise type: refer to TokeiseType enum                      |
-| **`tokenFormat`**                | <code>string</code>                                                             | token format: refer to TokeiseFormat enum                     |
-| **`hideCardScanner`**            | <code>string</code>                                                             | option to hide or show card scanner button                    |
-| **`merchantApplePayIdentifier`** | <code>string</code>                                                             | merchant apple pay bundle id                                  |
-| **`simplifyApplePayValidation`** | <code>string</code>                                                             | minize the vlaidation on apple pay billing and shipping info  |
-| **`supportedApplePayNetworks`**  | <code>[string]</code>                                                           | supported apple pay networks                                  |
-| **`token`**                      | <code>string</code>                                                             | returned token                                                |
-| **`transactionReference`**       | <code>string</code>                                                             | returned transaction reference                                |
-| **`samsungToken`**               | <code>string</code>                                                             | samsung Token                                                 |
-| **`theme`**                      | <code><a href="#paymentsdktheme">PaymentSDKTheme</a></code>                     | customized theme                                              |
-| **`alternativePaymentMethods`**  | <code>[string]</code>                                                           | list of alternative payment methods                           |
+| Prop                             | Type                                                                            | Description                                                    |
+| -------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| **`profileID`**                  | <code>string</code>                                                             | merchant profile id                                            |
+| **`serverKey`**                  | <code>string</code>                                                             | merchant server key                                            |
+| **`clientKey`**                  | <code>string</code>                                                             | merchant client key                                            |
+| **`transactionType`**            | <code>string</code>                                                             | transaction type: refer to TransactionType enum                |
+| **`transactionClass`**           | <code>string</code>                                                             | transaction class: refer to TransactionClass enum              |
+| **`cartID`**                     | <code>string</code>                                                             | order or cart id                                               |
+| **`currency`**                   | <code>string</code>                                                             | payment currency                                               |
+| **`amount`**                     | <code>number</code>                                                             | amount                                                         |
+| **`cartDescription`**            | <code>string</code>                                                             | order or cart description                                      |
+| **`languageCode`**               | <code>string</code>                                                             | user interface language code(en, ar, ..)                       |
+| **`forceShippingInfo`**          | <code>boolean</code>                                                            | validate shipping info                                         |
+| **`showBillingInfo`**            | <code>boolean</code>                                                            | validate billing info                                          |
+| **`showShippingInfo`**           | <code>boolean</code>                                                            | handle missing shipping info by showing shipping info section  |
+| **`billingDetails`**             | <code><a href="#paymentsdkbillingdetails">PaymentSDKBillingDetails</a></code>   | configured billing details                                     |
+| **`shippingDetails`**            | <code><a href="#paymentsdkshippingdetails">PaymentSDKShippingDetails</a></code> | configured shipping details                                    |
+| **`merchantCountryCode`**        | <code>string</code>                                                             | merchant country code                                          |
+| **`screenTitle`**                | <code>string</code>                                                             | title of the screen                                            |
+| **`merchantName`**               | <code>string</code>                                                             | merchant name                                                  |
+| **`serverIP`**                   | <code>string</code>                                                             | server ip                                                      |
+| **`tokeniseType`**               | <code>string</code>                                                             | tokenise type: refer to TokeiseType enum                       |
+| **`tokenFormat`**                | <code>string</code>                                                             | token format: refer to TokeiseFormat enum                      |
+| **`hideCardScanner`**            | <code>string</code>                                                             | option to hide or show card scanner button                     |
+| **`merchantApplePayIdentifier`** | <code>string</code>                                                             | merchant Apple Pay bundle id                                   |
+| **`simplifyApplePayValidation`** | <code>string</code>                                                             | minimize the validation on Apple Pay billing and shipping info |
+| **`supportedApplePayNetworks`**  | <code>[string]</code>                                                           | supported Apple Pay networks                                   |
+| **`token`**                      | <code>string</code>                                                             | returned token                                                 |
+| **`isDigitalProduct`**           | <code>boolean</code>                                                            | is digital product                                             |
+| **`transactionReference`**       | <code>string</code>                                                             | returned transaction reference                                 |
+| **`samsungToken`**               | <code>string</code>                                                             | samsung Token                                                  |
+| **`theme`**                      | <code><a href="#paymentsdktheme">PaymentSDKTheme</a></code>                     | customized theme                                               |
+| **`alternativePaymentMethods`**  | <code>[string]</code>                                                           | list of alternative payment methods                            |
 
 
 #### PaymentSDKBillingDetails

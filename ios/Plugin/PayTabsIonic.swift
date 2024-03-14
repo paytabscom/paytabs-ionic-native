@@ -19,6 +19,7 @@ import PaymentSDK
         configuration.simplifyApplePayValidation = dictionary["simplifyApplePayValidation"] as? Bool ?? false
         configuration.languageCode = dictionary["languageCode"] as? String
         configuration.forceShippingInfo = dictionary["forceShippingInfo"] as? Bool ?? false
+        configuration.isDigitalProduct = dictionary["isDigitalProduct"] as? Bool ?? false
         configuration.showBillingInfo = dictionary["showBillingInfo"] as? Bool ?? false
         configuration.showShippingInfo = dictionary["showShippingInfo"] as? Bool ?? false
         configuration.token = dictionary["token"] as? String
