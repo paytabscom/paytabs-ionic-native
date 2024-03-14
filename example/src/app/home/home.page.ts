@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component } from '@angular/core';
 // eslint-disable-next-line max-len
-import { PaymentSDKBillingDetails, PaymentSDKShippingDetails, PaymentSDKConfiguration, PayTabsIonic } from 'paytabs-ionic-native';
+import { PaymentSDKBillingDetails, PaymentSDKShippingDetails, PaymentSDKConfiguration, PayTabsIonic, PaymentSDKCardDiscount } from 'paytabs-ionic-native';
 
 @Component({
     selector: 'app-home',
@@ -35,6 +35,21 @@ export class HomePage {
             zip: '1234',
         };
 
+        let cardDiscounts: PaymentSDKCardDiscount[] = [
+            {
+                discountCards: ['4111'], 
+                discountValue: 5, 
+                discountTitle: '5% Discount', 
+                isPercentage: true 
+            },
+            {
+                discountCards: ['4000'],
+                discountValue: 10,
+                discountTitle: '10% Discount',
+                isPercentage: true
+            }
+        ];
+
         // eslint-disable-next-line prefer-const
         let configuration: PaymentSDKConfiguration = {
             profileID: '*profile ID*',
@@ -49,6 +64,7 @@ export class HomePage {
             screenTitle: 'Pay with Card',
             billingDetails,
             shippingDetails,
+            cardDiscounts,
         };
         const result = await PayTabsIonic.startCardPayment(configuration);
         this.handleResult(result);
