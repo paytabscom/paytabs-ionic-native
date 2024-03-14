@@ -2,10 +2,9 @@
 import {Component} from '@angular/core';
 import {
     PaymentSDKBillingDetails,
-    PaymentSDKCardDiscount,
     PaymentSDKConfiguration,
     PaymentSDKShippingDetails, PayTabsIonic
-} from "../../../../src";
+} from "paytabs-ionic-native";
 // eslint-disable-next-line max-len
 
 @Component({
@@ -40,21 +39,6 @@ export class HomePage {
             zip: '1234',
         };
 
-        let discounts: PaymentSDKCardDiscount[] = [
-            {
-                discountCards: ['4111'],
-                discountValue: 5,
-                discountTitle: '5% Discount',
-                isPercentage: true
-            },
-            {
-                discountCards: ['4000'],
-                discountValue: 10,
-                discountTitle: '10% Discount',
-                isPercentage: true
-            }
-        ];
-
         // eslint-disable-next-line prefer-const
         let configuration: PaymentSDKConfiguration = {
             profileID: '*profile ID*',
@@ -69,7 +53,6 @@ export class HomePage {
             screenTitle: 'Pay with Card',
             billingDetails,
             shippingDetails,
-            cardDiscounts: discounts,
         };
         const result = await PayTabsIonic.startCardPayment(configuration);
         this.handleResult(result);
