@@ -182,7 +182,7 @@ export interface PaymentSDKConfiguration {
   */
   alternativePaymentMethods?: [string];
 
-  cardDiscounts?: [PaymentSDKCardDiscount];
+  cardDiscounts?: PaymentSDKCardDiscount[];
 }
 
 /**
