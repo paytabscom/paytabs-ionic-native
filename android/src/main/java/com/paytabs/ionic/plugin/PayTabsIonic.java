@@ -22,7 +22,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PayTabsIonic {
 
@@ -125,31 +127,39 @@ public class PayTabsIonic {
             configData.setMerchantIcon(iconUri);
         }
 
-        if(paymentDetails.getBoolean("isDigitalProduct") != null){
+        if (paymentDetails.getBoolean("isDigitalProduct") != null) {
             configData.isDigitalProduct(paymentDetails.getBoolean("isDigitalProduct"));
         }
         if (paymentDetails.getArray("cardDiscounts") != null) {
             configData.setCardDiscount(getPaymentSdkCardDiscounts(paymentDetails.getArray("cardDiscounts")));
         }
+        configData.setMetadata(getMetadata());
         return configData;
+    }
+
+    private Map<String, Object> getMetadata() {
+        Map<String, Object> metadata = new HashMap<>();
+        metadata.put("PaymentSDKPluginName", "ionic");
+        metadata.put("PaymentSDKPluginVersion", "1.0.4");
+        return metadata;
     }
 
     @NonNull
     private static List<PaymentSdkCardDiscount> getPaymentSdkCardDiscounts(JSArray ptCardDiscounts) {
         final List<PaymentSdkCardDiscount> paymentSdkCardDiscounts = new ArrayList<>();
-            for (int i = 0; i < ptCardDiscounts.length(); i++) {
-                final JSONObject discount = ptCardDiscounts.optJSONObject(i);
-                final JSONArray cardsPrefixes = discount.optJSONArray("discountCards");
-                final List<String> cards = new ArrayList<>();
-                if (cardsPrefixes != null) {
-                    for (int j = 0; j < cardsPrefixes.length(); j++) {
-                        cards.add(cardsPrefixes.optString(j));
-                    }
+        for (int i = 0; i < ptCardDiscounts.length(); i++) {
+            final JSONObject discount = ptCardDiscounts.optJSONObject(i);
+            final JSONArray cardsPrefixes = discount.optJSONArray("discountCards");
+            final List<String> cards = new ArrayList<>();
+            if (cardsPrefixes != null) {
+                for (int j = 0; j < cardsPrefixes.length(); j++) {
+                    cards.add(cardsPrefixes.optString(j));
                 }
-                final PaymentSdkCardDiscount cardDiscount = new PaymentSdkCardDiscount(cards, discount.optDouble("discountValue"),
-                        discount.optString("discountTitle"), discount.optBoolean("isPercentage"));
-                paymentSdkCardDiscounts.add(cardDiscount);
             }
+            final PaymentSdkCardDiscount cardDiscount = new PaymentSdkCardDiscount(cards, discount.optDouble("discountValue"),
+                    discount.optString("discountTitle"), discount.optBoolean("isPercentage"));
+            paymentSdkCardDiscounts.add(cardDiscount);
+        }
         return paymentSdkCardDiscounts;
     }
 

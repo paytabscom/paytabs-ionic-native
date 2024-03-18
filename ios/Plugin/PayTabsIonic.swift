@@ -59,7 +59,7 @@ import PaymentSDK
          if let discountsDictionary = dictionary["cardDiscounts"] as?  [[String: Any]] {
             configuration.cardDiscounts = generateDiscountDetails(dictionary: discountsDictionary)
         }
-
+        configuration.metaData = ["PaymentSDKPluginName": "ionic", "PaymentSDKPluginVersion": "1.0.4"]
         return configuration
     }
     
