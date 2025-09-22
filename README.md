@@ -270,7 +270,6 @@ configuration.alternativePaymentMethods = [cordova.plugins.CordovaPaymentPlugin.
 * [`startCardPayment(...)`](#startcardpayment)
 * [`startTokenizedCardPayment(...)`](#starttokenizedcardpayment)
 * [`start3DSecureTokenizedCardPayment(...)`](#start3dsecuretokenizedcardpayment)
-* [`startPaymentWithSavedCards(...)`](#startpaymentwithsavedcards)
 * [`startApplePayPayment(...)`](#startapplepaypayment)
 * [`queryTransaction(...)`](#querytransaction)
 * [`startAlternativePaymentMethod(...)`](#startalternativepaymentmethod)

@@ -12,9 +12,6 @@ export class PayTabsIonicWeb extends WebPlugin implements PayTabsIonicPlugin {
   start3DSecureTokenizedCardPayment(_options: PaymentSDKConfiguration, _savedCardInfo: PaymentSDKSavedCardInfo, _token: string): Promise<any> {
     throw new Error('Method not implemented.');
   }
-  startPaymentWithSavedCards(_options: PaymentSDKConfiguration, _support3ds: boolean): Promise<any> {
-    throw new Error('Method not implemented.');
-  }
   startApplePayPayment(_options: PaymentSDKConfiguration): Promise<any> {
     throw new Error('Method not implemented.');
   }

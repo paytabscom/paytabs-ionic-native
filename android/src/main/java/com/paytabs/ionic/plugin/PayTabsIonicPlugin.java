@@ -69,21 +69,6 @@ public class PayTabsIonicPlugin extends Plugin implements CallbackPaymentInterfa
 
     }
 
-    @PluginMethod
-    public void startPaymentWithSavedCards(PluginCall call) {
-        this.call = call;
-        try {
-            PaymentSdkConfigurationDetails configData = payTabsHelper.createConfiguration(call).build();
-            PaymentSdkActivity.startPaymentWithSavedCards(
-                this.getActivity(), 
-                configData,
-                false,
-                 this);
-        } catch (JSONException e) {
-            payTabsHelper.returnResponse(500,"unexpected JSON exception", "error", null, call);
-        }
-
-    }
 
     @PluginMethod
     public void startAlternativePaymentMethod(PluginCall call) {

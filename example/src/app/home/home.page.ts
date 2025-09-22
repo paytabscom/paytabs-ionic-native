@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import {Component} from '@angular/core';
-import {
+import type {
     PaymentSDKBillingDetails,
     PaymentSDKConfiguration,
-    PaymentSDKShippingDetails, PayTabsIonic
+    PaymentSDKShippingDetails} from "paytabs-ionic-native";
+import { PayTabsIonic
 } from "paytabs-ionic-native";
 // eslint-disable-next-line max-len
 

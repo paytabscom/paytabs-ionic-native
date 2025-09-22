@@ -2,7 +2,6 @@ export interface PayTabsIonicPlugin {
   startCardPayment(options: PaymentSDKConfiguration): Promise<any>;
   startTokenizedCardPayment(options: PaymentSDKTokenizationArgument): Promise<any>;
   start3DSecureTokenizedCardPayment(options: PaymentSDKConfiguration, savedCardInfo: PaymentSDKSavedCardInfo, token: string): Promise<any>;
-  startPaymentWithSavedCards(options: PaymentSDKConfiguration, support3ds: boolean): Promise<any>;
   startApplePayPayment(options: PaymentSDKConfiguration): Promise<any>;
   queryTransaction(options: PaymentSDKQueryConfiguration): Promise<any>;
   startAlternativePaymentMethod(options: PaymentSDKConfiguration): Promise<any>;
