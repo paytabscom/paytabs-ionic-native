@@ -3,6 +3,11 @@ set -e
 
 echo "Creating release branch..."
 
+if [ -z "$GITHUB_TOKEN" ]; then
+  echo "Error: GITHUB_TOKEN is not set or empty."
+  exit 1
+fi
+
 NEW_VERSION=$NEW_VERSION
 echo "Creating release branch: release_$NEW_VERSION"
 

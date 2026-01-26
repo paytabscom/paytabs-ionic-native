@@ -3,6 +3,11 @@ set -e
 
 echo "Creating and pushing git tag..."
 
+if [ -z "$GITHUB_TOKEN" ]; then
+  echo "Error: GITHUB_TOKEN is not set or empty."
+  exit 1
+fi
+
 NEW_VERSION=$NEW_VERSION
 echo "Creating tag: v$NEW_VERSION"
 

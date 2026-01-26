@@ -3,6 +3,11 @@ set -e
 
 echo "Pushing bumped version to build branch..."
 
+if [ -z "$GITHUB_TOKEN" ]; then
+  echo "Error: GITHUB_TOKEN is not set or empty."
+  exit 1
+fi
+
 NEW_VERSION=$NEW_VERSION
 BUILD_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 echo "Current build branch: $BUILD_BRANCH"
