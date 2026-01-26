@@ -1,0 +1,43 @@
+workflows:
+
+  publish-npm:
+    name: Publish to NPM
+    max_build_duration: 30
+    instance_type: mac_mini_m1
+    environment:
+      groups:
+        - npm_credentials
+        - git
+      vars:
+        NODE_VERSION: 18
+      node: $NODE_VERSION
+    scripts:
+      - name: Install dependencies
+        script: bash scripts/install-dependencies.sh
+      - name: Build library
+        script: bash scripts/build-library.sh
+      - name: Setup git credentials
+        script: bash scripts/setup-git.sh
+      - name: Read current version
+        script: bash scripts/read-version.sh
+      - name: Bump version
+        script: bash scripts/bump-version.sh
+      - name: Update README with new version
+        script: bash scripts/update-readme.sh
+      - name: Push bumped version to build branch
+        script: bash scripts/push-version.sh
+      - name: Create release branch
+        script: bash scripts/create-release-branch.sh
+      - name: Create and push git tag
+        script: bash scripts/create-tag.sh
+      - name: Configure npm authentication
+        script: bash scripts/configure-npm.sh
+      - name: Publish to npm
+        script: bash scripts/publish-npm.sh
+    publishing:
+      email:
+        recipients:
+          - mobile.devop@paytabs.com
+        notify:
+          success: true
+          failure: true
