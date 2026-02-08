@@ -1,6 +1,6 @@
 # paytabs-ionic-native
 
-![Version](https://img.shields.io/badge/PayTabs%20Ionic%20Native-v1.1.1-green)
+![Version](https://img.shields.io/badge/PayTabs%20Ionic%20Native-v1.1.2-green)
 
 PayTabs Ionic Native library is a wrapper for the native PayTabs Android and iOS SDKs, It helps you integrate with
 PayTabs seamlessly.
