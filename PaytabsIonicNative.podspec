@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
   s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}'
   s.ios.deployment_target  = '15.0'
   s.dependency 'Capacitor'
-  s.dependency "PayTabsSDK", "6.6.41"
+  s.dependency "PayTabsSDK", "6.6.42"
   s.swift_version = '5.9'
 end
